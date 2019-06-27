@@ -1,6 +1,7 @@
 const isGoodAttitude = (attitude: string) => attitude === 'good'
 const isJediColor = (color: string) => color === 'blue' || color === 'green'
 const getSection = (name: string) => document.querySelector(`[data-section="${name}"]`)
+const domNodesToArray = (nodes: NodeListOf<HTMLInputElement>) => Array.prototype.slice.call(nodes)
 
 const updateView = () => {
     const attitude = state.getValue('attitude')
@@ -10,6 +11,12 @@ const updateView = () => {
     const colorSection = getSection('color') as HTMLElement
     const lightsaber = document.querySelector('.lightsaber') as HTMLElement
     const lightsaberLight = document.querySelector('.lightsaber__light')
+    const lightsaberPossibleClasses = [
+        'lightsaber__light--red',
+        'lightsaber__light--blue',
+        'lightsaber__light--green',
+        'lightsaber__light--purple',
+    ]
 
     colorSection.hidden = !isAttitudeSelected
     lightsaber.hidden = !isColorSelected
@@ -21,10 +28,7 @@ const updateView = () => {
         )
     })
 
-    lightsaberLight.classList.remove('lightsaber__light--red')
-    lightsaberLight.classList.remove('lightsaber__light--blue')
-    lightsaberLight.classList.remove('lightsaber__light--green')
-    lightsaberLight.classList.remove('lightsaber__light--purple')
+    lightsaberLight.classList.remove(...lightsaberPossibleClasses)
     lightsaberLight.classList.toggle(`lightsaber__light--${color}`)
 }
 
@@ -34,10 +38,6 @@ const state = {
         updateView()
     },
     getValue(key: string) {
-        if (!key) {
-            return this
-        }
-
         return this[key]
     }
 }
@@ -54,7 +54,7 @@ const bindInputs = () => {
         return
     }
 
-    inputs.forEach(input => {
+    domNodesToArray(inputs).forEach((input: HTMLInputElement) => {
         input.addEventListener('change', handleInputChange)
     })
 }
