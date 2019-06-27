@@ -1,0 +1,5 @@
+mixin answers(answersList)
+    each a in answersList
+        label
+            =a.title
+            input(type="radio" name=`${a.name}` value=`${a.value}`)

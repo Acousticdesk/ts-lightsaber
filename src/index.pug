@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+    head
+        title Let's craft a lightsaber
+        link(rel="stylesheet" href="../src/styles.css")
+    body
+        include includes/mixins
+
+        div.container
+            h1.main-heading Greetings! Let's create a lightsaber for you!
+            div(data-section="attitude")
+                h3  First, what attitude do you have?
+                +answers([
+                  {title: 'Good', name: 'attitude', value: 'good'},
+                  {title: 'Evil', name: 'attitude', value: 'evil'}
+                ])
+
+            div(data-section="color")
+                h3  Second, choose a color!
+                +answers([
+                  {title: 'Blue', name: 'color', value: 'blue'},
+                  {title: 'Green', name: 'color', value: 'green'},
+                  {title: 'Red', name: 'color', value: 'red'},
+                  {title: 'Purple', name: 'color', value: 'purple'}
+                ])
+
+            div.lightsaber
+                div.lightsaber__light.lightsaber__light--red
+                div.lightsaber__hand
+                div.lightsaber__hand-footer
