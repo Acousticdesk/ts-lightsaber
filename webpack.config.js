@@ -22,6 +22,9 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['.ts', '.js', '.json']
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.pug'

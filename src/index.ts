@@ -1,7 +1,4 @@
-const isGoodAttitude = (attitude: string) => attitude === 'good'
-const isJediColor = (color: string) => color === 'blue' || color === 'green'
-const getSection = (name: string) => document.querySelector(`[data-section="${name}"]`)
-const domNodesToArray = (nodes: NodeListOf<HTMLInputElement>) => Array.prototype.slice.call(nodes)
+import { isGoodAttitude, isJediColor, getSection, domNodesToArray } from './const'
 
 const updateView = () => {
     const attitude = state.getValue('attitude')
@@ -21,7 +18,7 @@ const updateView = () => {
     colorSection.hidden = !isAttitudeSelected
     lightsaber.hidden = !isColorSelected
 
-    document.querySelectorAll('input[name="color"]').forEach((input: HTMLInputElement) => {
+    domNodesToArray(document.querySelectorAll('input[name="color"]')).forEach((input: HTMLInputElement) => {
         input.parentElement.hidden = (
             !isJediColor(input.value) && isGoodAttitude(attitude) ||
             isJediColor(input.value) && !isGoodAttitude(attitude)
